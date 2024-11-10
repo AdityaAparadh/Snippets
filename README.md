@@ -718,8 +718,126 @@ Then, the number of parts into which these lines divide the plane is = 1 + Sn
  -->
 ```cpp
 
-void Solve() {
-    // Add code to solve the problem here
+ //----------------------------------------- Bridges in Graph -------------------------------------------------//
+
+```cpp
+class Solution {
+private:
+    int timer = 1;
+    void dfs(int node, int parent, vector<int> &vis,
+             vector<int> adj[], int tin[], int low[], vector<vector<int>> &bridges) {
+        vis[node] = 1;
+        tin[node] = low[node] = timer;
+        timer++;
+        for (auto it : adj[node]) {
+            if (it == parent) continue;
+            if (vis[it] == 0) {
+                dfs(it, node, vis, adj, tin, low, bridges);
+                low[node] = min(low[it], low[node]);
+                // node --- it
+                if (low[it] > tin[node]) {
+                    bridges.push_back({it, node});
+                }
+            }
+            else {
+                low[node] = min(low[node], low[it]);
+            }
+        }
+    }
+public:
+    vector<vector<int>> criticalConnections(int n,
+    vector<vector<int>>& connections) {
+        vector<int> adj[n];
+        for (auto it : connections) {
+            int u = it[0], v = it[1];
+            adj[u].push_back(v);
+            adj[v].push_back(u);
+        }
+        vector<int> vis(n, 0);
+        int tin[n];
+        int low[n];
+        vector<vector<int>> bridges;
+        dfs(0, -1, vis, adj, tin, low, bridges);
+        return bridges;
+    }
+};
+
+int main() {
+
+    int n = 4;
+    vector<vector<int>> connections = {
+        {0, 1}, {1, 2},
+        {2, 0}, {1, 3}
+    };
+
+    Solution obj;
+    vector<vector<int>> bridges = obj.criticalConnections(n, connections);
+    for (auto it : bridges) {
+        cout << "[" << it[0] << ", " << it[1] << "] ";
+    }
+    cout << endl;
+    return 0;
 }
 
 ```
+
+ //Decimal to Binary
+
+```cpp
+ string DecimalToBinary(int num)
+{
+    string str;
+      while(num){
+      if(num & 1) // 1
+        str+='1';
+      else // 0
+        str+='0';
+      num>>=1; // Right Shift by 1  
+    }    
+      return str;
+}
+```
+
+//binary to dec ip is string
+
+```cpp
+int binaryToDecimal(string str)
+{
+    int dec_num = 0;
+      int power = 0 ;
+    int n = str.length() ; 
+   
+      for(int i = n-1 ; i>=0 ; i--){
+      if(str[i] == '1'){
+        dec_num += (1<<power) ;
+      }
+      power++ ; 
+    }
+   
+    return dec_num;
+}
+```
+//binary to decimal ip is number
+
+```cpp
+int binaryToDecimal(int n)
+{
+    int dec_num = 0 ;
+      int power = 0 ;
+      while(n>0){
+      if(n%10 == 1){ // extracting the last digit
+        dec_num += (1<<power) ;
+      }
+      power++ ; 
+      n = n / 10 ;
+    }
+      return dec_num ;
+}
+```
+
+```cpp
+void Solve() {
+    // Add code to solve the problem here
+}
+```
+
