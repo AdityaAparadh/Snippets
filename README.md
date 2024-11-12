@@ -1,14 +1,15 @@
-
 # Competitive Programming Templates
+
+
 
 ### Constants
 ```cpp
 #define ll long long
-#define pi 3.14159265358979323846
 const ll MOD = 1e9 + 7;
 const int MAXN = 1e6 + 5;
 ```
 
+---
 ### Prime Checking, Factorization and Sieve 
 
 ```cpp
@@ -86,6 +87,8 @@ void spfsieve() {
     }
 }
 ```
+
+---
 ### Range XOR 
 ```cpp
 ll xor_upto(ll n) {
@@ -99,6 +102,8 @@ ll range_xor(ll l, ll r) {
     return xor_upto(r) ^ xor_upto(l - 1);
 }
 ```
+
+---
 ### Modular Arithmetic
 ```cpp
 ll mod_add(ll a, ll b, ll m) { return (((a + b) % m) + m) % m; }
@@ -118,9 +123,21 @@ template <typename T> T binpowmod(T base, T exp, T mod) {
     }
     return result;
 }
+
+ll mod_add(ll a, ll b, ll m) { return (((a + b) % m) + m) % m; }
+ll mod_sub(ll a, ll b, ll m) { return (((a - b) % m) + m) % m; }
+ll mod_mul(ll a, ll b, ll m) { return (((a * b) % m) + m) % m; }
+ll mod_inverse(ll a, ll m) { return binpowmod(a, m - 2, m); }  // for prime m
+ll mod_div(ll a, ll b, ll m) { return mod_mul(a, mod_inverse(b, m), m); }
+
+
+
+
 ```
 
+---
 ### Combinatorics and Factorials 
+
 ```cpp
 vector<ll> fact(MAXN), inv_fact(MAXN);
 void factorial(ll mod) {
@@ -222,6 +239,8 @@ public:
     }
 };
 ```
+
+---
 ### Subset generation
 ```cpp
 vector<vector<int>> generateSubsets(const vector<int>& set) {
@@ -241,6 +260,7 @@ vector<vector<int>> generateSubsets(const vector<int>& set) {
 
 ```
 
+---
 ### Generate Permutations
 
 ```cpp
@@ -255,6 +275,7 @@ vector<vector<int>> generatePermutations(vector<int> set) {
 ```
 
 
+---
 ### Search Algorithms
 ```cpp
 // Binary Search
@@ -282,6 +303,8 @@ bool two_pointer_sum(const vector<int>& arr, int target) {
     return false;
 }
 ```
+
+---
 ### Greedy Algorithms 
 ```cpp
 // Fractional Knapsack Problem
@@ -304,6 +327,8 @@ double fractional_knapsack(vector<pair<int, int>>& items, int W) {
     return total_value;
 }
 ```
+
+---
 ### Graph Algorithms 
 
 ```cpp
@@ -375,6 +400,8 @@ template <typename T = int> struct Dijkstra {
     }
 };
 ```
+
+---
 ### Big Number Multiplication 
 ```cpp
 // Function to multiply two large numbers represented as strings
@@ -410,6 +437,8 @@ int grundy(int n) {
 }
 
 ```
+
+---
 ### Disjoint Set Union 
 
 ```cpp
@@ -503,6 +532,8 @@ long long binpow(long long a, long long b, long long m) {
     return res;
 }
 ```
+
+---
 ### MEX 
 
 ```cpp
@@ -533,6 +564,7 @@ int mex(vector<int> const& A) {
 }
 ```
 
+---
 ### Max Subarray Sum (Kadane's Algorithm)
 
 ```cpp
@@ -548,6 +580,7 @@ int SubarrayMax(vector<int> arr)
 }
 ```
 
+---
 ### Sliding Window Maximum
 
 ```cpp
@@ -571,6 +604,7 @@ vector<int> slidingWindowMaximum(vector<int>& nums, int k) {
 ```
 
 
+---
 ### Hamming Distance
 
 ```cpp
@@ -589,7 +623,8 @@ int hamming(string a, string b) {
 }
 ```
 
-//----------------------------------------- KMP -------------------------------------------------//
+---
+### KMP 
 
 ```cpp
 class Solution
@@ -655,8 +690,31 @@ class Solution
      
 };
 ```
+
+---
+###  PnC 
+
+a. The number of totally different straight lines formed by joining `n` points on a plane of which `m (<n)` are collinear is  `nC2 – mC2 + 1`
+
+b. The number of total triangles formed by joining n points on a plane of which `m(<n)` are collinear is `nC3 – mC3`
+
+c. The number of diagonals in a polygon of n sides is `nC2 – n`
+
+d. If `m` parallel lines in a plane are intersected by a family of other `n` parallel lines. Then total number of
+parallelograms so formed are `mC2 × nC2`
+
+e. Given `n` points on the circumference of a circle, then:
+- the number of straight lines between these points are `nC2`
+- the number of triangles between these points are `nC3`
+- the number of quadrilaterals between these points are `nC4`
+
+f. If `n` straight lines are drawn in the plane such that no two lines are parallel and no three lines are concurrent.
+Then, the number of parts into which these lines divide the plane is = `1 + Sn`
+
+---
+
+### z-algo
 ```cpp
-//------------------------z-algo---------------------
 vector<int> z_function(string s) {
     int n = (int) s.length();
     vector<int> z(n);
@@ -670,8 +728,10 @@ vector<int> z_function(string s) {
     }
     return z;
 }
-//--------------------------------------------------- Convex Hull ----------------------------------------//
+```
 
+### Convex Hull
+```cpp
 struct Point {
     ll x, y;
     bool operator<(const Point& p) const {
@@ -700,25 +760,9 @@ vector<Point> convex_hull(vector<Point>& P) {
     return H;
 }
 ```
+---
 
-//----------------------------------------- PnC -------------------------------------------------//
-
-<!-- (a) The number of totally different straight lines formed by joining n points on a plane of which m(<n) are
-collinear is nC2 – mC2 + 1.
-(b) The number of total triangles formed by joining n points on a plane of which m(<n) are collinear is nC3 – mC3.
-(c) The number of diagonals in a polygon of n sides is nC2 – n.
-(d) If m parallel lines in a plane are intersected by a family of other n parallel lines. Then total number of
-parallelograms so formed are mC2 × nC2.
-(e) Given n points on the circumference of a circle, then
-the number of straight lines between these points are nC2
-the number of triangles between these points are nC3
-the number of quadrilaterals between these points are nC4
-(f) If n straight lines are drawn in the plane such that no two lines are parallel and no three lines are concurrent.
-Then, the number of parts into which these lines divide the plane is = 1 + Sn
- -->
-```cpp
-
- //----------------------------------------- Bridges in Graph -------------------------------------------------//
+### Bridges in Graph
 
 ```cpp
 class Solution {
@@ -734,7 +778,6 @@ private:
             if (vis[it] == 0) {
                 dfs(it, node, vis, adj, tin, low, bridges);
                 low[node] = min(low[it], low[node]);
-                // node --- it
                 if (low[it] > tin[node]) {
                     bridges.push_back({it, node});
                 }
@@ -781,9 +824,13 @@ int main() {
 
 ```
 
- //Decimal to Binary
+---
+
+### Conversions
+
 
 ```cpp
+ //Decimal to Binary
  string DecimalToBinary(int num)
 {
     string str;
@@ -797,10 +844,10 @@ int main() {
       return str;
 }
 ```
-
-//binary to dec ip is string
+---
 
 ```cpp
+//binary to dec ip is string
 int binaryToDecimal(string str)
 {
     int dec_num = 0;
@@ -817,9 +864,9 @@ int binaryToDecimal(string str)
     return dec_num;
 }
 ```
-//binary to decimal ip is number
-
+---
 ```cpp
+//binary to decimal ip is number
 int binaryToDecimal(int n)
 {
     int dec_num = 0 ;
@@ -831,13 +878,7 @@ int binaryToDecimal(int n)
       power++ ; 
       n = n / 10 ;
     }
-      return dec_num ;
+      return dec_num;
 }
 ```
-
-```cpp
-void Solve() {
-    // Add code to solve the problem here
-}
-```
-
+---
